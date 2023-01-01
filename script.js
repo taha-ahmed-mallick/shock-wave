@@ -155,24 +155,32 @@ class Player {
       move(event) {
             switch (event) {
                   case "up":
-                        let up = setInterval(() => {
-                              this.movement[0] ? this.y -= this.speed : clearInterval(up);
-                        }, 10);
+                        if (!this.movement[0]) {
+                              let up = setInterval(() => {
+                                    this.movement[0] ? this.y -= this.speed : clearInterval(up);
+                              }, 10);
+                        }
                         break;
                   case "left":
-                        let left = setInterval(() => {
-                              this.movement[1] ? this.x -= this.speed : clearInterval(left);
-                        }, 10);
+                        if (!this.movement[1]) {
+                              let left = setInterval(() => {
+                                    this.movement[1] ? this.x -= this.speed : clearInterval(left);
+                              }, 10);
+                        }
                         break;
                   case "down":
-                        let down = setInterval(() => {
-                              this.movement[2] ? this.y += this.speed : clearInterval(down);
-                        }, 10);
+                        if (!this.movement[2]) {
+                              let down = setInterval(() => {
+                                    this.movement[2] ? this.y += this.speed : clearInterval(down);
+                              }, 10);
+                        }
                         break;
                   case "right":
-                        let right = setInterval(() => {
-                              this.movement[3] ? this.x += this.speed : clearInterval(right);
-                        }, 10);
+                        if (!this.movement[3]) {
+                              let right = setInterval(() => {
+                                    this.movement[3] ? this.x += this.speed : clearInterval(right);
+                              }, 10);
+                        }
                         break;
                   default:
                         console.log("Not Possible");
@@ -343,20 +351,20 @@ window.addEventListener("keydown", (eve) => {
                   if (detPlyrs[i].keys[j] == eve.keyCode) {
                         switch (j) {
                               case 0:
-                                    plyrArr[i].movement[0] = 1;
                                     plyrArr[i].move("up");
+                                    plyrArr[i].movement[0] = 1;
                                     break;
                               case 1:
-                                    plyrArr[i].movement[1] = 1;
                                     plyrArr[i].move("left");
+                                    plyrArr[i].movement[1] = 1;
                                     break;
                               case 2:
-                                    plyrArr[i].movement[2] = 1;
                                     plyrArr[i].move("down");
+                                    plyrArr[i].movement[2] = 1;
                                     break;
                               case 3:
-                                    plyrArr[i].movement[3] = 1;
                                     plyrArr[i].move("right");
+                                    plyrArr[i].movement[3] = 1;
                                     break;
                               default:
                                     console.error("Not Possible");
