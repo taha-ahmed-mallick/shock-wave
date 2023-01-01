@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,900;1,800&family=Caveat:wght@400;500&display=swap');
+
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Caveat', cursive;
+      user-select: none;
+      transition: 0.15s linear;
+}
+
+body {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+}
+
+div.screens {
+      height: 100vh;
+      width: 100vw;
+}
+
+div.title-screen {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      background: url(./resources/back-filled.png);
+      z-index: 4;
+}
+
+div.title-screen div.board {
+      background: url(./resources/back-filled.png);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background-size: contain;
+      display: none;
+}
+
+div.title-screen div.board.back {
+      transform: perspective(300px) translateZ(-109px) translateY(50%);
+      display: block;
+      top: -50%;
+}
+
+div.title-screen div.board.bottom {
+      transform: perspective(1000px) rotate3d(1, 0, 0, 80deg) translateY(47%);
+      display: block;
+      z-index: 1;
+}
+
+div.title-screen div.board.left {
+      transform: perspective(1000px) rotate3d(0, 1, 0, 44deg) translate3d(-28%, 8%, 0);
+      top: -50%;
+      left: -50%;
+      display: block;
+      z-index: 2;
+}
+
+div.title-screen div.board.right {
+      transform: perspective(1000px) rotate3d(0, 1, 0, -44deg) translate3d(28%, 8%, 0);
+      top: -50%;
+      left: 50%;
+      display: block;
+      z-index: 2;
+}
+
+div.players {
+      position: absolute;
+      z-index: 100;
+      height: 100vh;
+      width: 100vw;
+}
+
+div.players img.green {
+      transform: perspective(300px) translateZ(-58px) translate(50%, 74%);
+}
+
+div.players img.yellow {
+      transform: perspective(300px) translateZ(11px) translate(92%, 74%);
+}
+
+div.players img.red {
+      transform: perspective(300px) translateZ(-88px) translate(148%, 100%);
+}
+
+div.btns {
+      position: absolute;
+      z-index: 1000;
+      bottom: 15%;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+}
+
+div.btns>div {
+      cursor: pointer;
+      text-transform: uppercase;
+}
+
+div.btns>div:hover img {
+      transform: translate(-38%, -45%) rotate(-23deg)
+}
+
+div.btns img {
+      position: absolute;
+      z-index: 1;
+      transform: translate(-38%, -41%) rotate(-23deg);
+}
+
+div.btns span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      color: #f1f1f1;
+      position: absolute;
+      background: #7428d3;
+      width: 200px;
+      height: 40px;
+      text-align: center;
+      border-radius: 10px 30px;
+}
+
+div.plyr-screen {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      background: #7428d3;
+      z-index: 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+div.back-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      height: fit-content;
+      width: fit-content;
+      cursor: pointer;
+}
+
+div.back-btn:active {
+      transform: scale(0.9);
+}
+
+div.back-btn span.one,
+div.back-btn span.two {
+      position: absolute;
+      border-radius: 22%;
+      border: 12px solid transparent;
+      border-left: 12px solid white;
+
+}
+
+div.back-btn span.one {
+      transform: rotate(45deg);
+}
+
+div.back-btn span.two {
+      transform: rotate(-45deg);
+}
+
+div.back-btn span.three {
+      height: 10px;
+      width: 40px;
+      background: #fff;
+      position: absolute;
+      transform: translate(3px, 8px);
+      border-radius: 6px 7px;
+}
+
+div.plyr-screen div.background {
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url(./resources/triangle.svg);
+      background-size: 62px;
+      background-position: 100% 100%;
+      z-index: -1;
+      animation: tri-movement 40s linear 0s infinite;
+}
+
+@keyframes tri-movement {
+      0% {
+            background-position: 100% 100%;
+      }
+
+      100% {
+            background-position: 0% 0%;
+      }
+}
+
+div.cont {
+      height: 100%;
+      width: 100%;
+      padding: 15%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+}
+
+h1 {
+
+      text-transform: uppercase;
+      font-family: 'Barlow Condensed', sans-serif;
+      text-align: center;
+      color: #efefef;
+      width: fit-content;
+      height: fit-content;
+      background: #a73ef29e;
+      padding: 5px 15px;
+}
+
+div.opt {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      font-size: 30px;
+      font-weight: 600;
+      color: #dfdfdf;
+}
+
+span.choice {
+      padding: 18px;
+      text-shadow: 0px 0 5px #252525;
+      box-shadow: 0px 0px 0px 3.5px black;
+      cursor: pointer;
+}
+
+span.choice.disabled {
+      cursor: default;
+      background: #252525f0;
+      transform: scale(1) !important;
+}
+
+span.choice:nth-child(1) {
+      background: #fb0d01;
+}
+
+span.choice:nth-child(1)::after {
+      content: '';
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      transform: translate(-71%, -24%);
+      background: #32323273;
+}
+
+span.choice:nth-child(2) {
+      background: #01baf9;
+}
+
+span.choice:nth-child(3) {
+      background: #32ec08;
+}
+
+span.choice:nth-child(4) {
+      background: #fed001;
+}
+
+span.choice:active {
+      transform: scale(0.85);
+}
+
+div.waiting-screen {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      top: 0;
+      background-color: #434343;
+      z-index: 2;
+}
+
+div.container {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      top: 0;
+      z-index: 1;
+}
+
+div.game-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+div.game {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+}
+
+canvas {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: -9px 9px 11px 13px #00000096;
+}
+
+div.game img {
+      position: relative;
+      width: 100%;
+}
+
+img.rk-t {
+      top: -25%;
+      transform: translateY(50%);
+}
+
+img.rk-b {
+      transform: translateY(-50%);
+      bottom: -25%;
+}
+
+audio {
+      display: none !important;
+}
+
+div.game-screen div.back {
+      position: absolute;
+      top: 0px;
+      background: url(./resources/lava.gif);
+      height: 100vh;
+      width: 100vw;
+      background-size: 206px;
+      background-repeat: repeat;
+      animation: lava-movement 30s linear 0s infinite;
+}
+
+@keyframes lava-movement {
+      0% {
+            background-position-x: 0%;
+      }
+
+      100% {
+            background-position-x: 100%;
+      }
+}
+
+div.title-screen {
+      display: none;
+}

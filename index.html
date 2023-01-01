@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Shock Wave</title>
+      <link rel="stylesheet" href="./style.css">
+      <link rel="shortcut icon" href="./resources/icon.png" type="image/x-icon">
+</head>
+
+<body>
+      <div class="screens">
+            <div class="title-screen screen">
+                  <div class="background">
+                        <div class="board back"></div>
+                        <div class="board bottom"></div>
+                        <div class="board left"></div>
+                        <div class="board right"></div>
+                  </div>
+                  <div class="players">
+                        <img src="./resources/green.png" class="green">
+                        <img src="./resources/yellow.png" class="yellow">
+                        <img src="./resources/red.png" class="red">
+                  </div>
+                  <div class="btns">
+                        <div class="start">
+                              <img src="./resources/controller.png">
+                              <span>start!</span>
+                        </div>
+                        <div class="settings">
+                              <img src="./resources/gear.png">
+                              <span>settings</span>
+                        </div>
+                  </div>
+            </div>
+            <div class="plyr-screen screen">
+                  <div class="back-btn">
+                        <span class="one"></span>
+                        <span class="two"></span>
+                        <span class="three"></span>
+                  </div>
+                  <div class="background"></div>
+                  <div class="cont">
+                        <h1>number of players</h1>
+                        <div class="opt">
+                              <span class="choice disabled">1p</span>
+                              <span class="choice">2p</span>
+                              <span class="choice">3p</span>
+                              <span class="choice">4p</span>
+                        </div>
+                  </div>
+            </div>
+            <div class="waiting-screen screen"></div>
+            <div class="container screen">
+                  <div class="game-screen">
+                        <div class="back"></div>
+                        <div class="game">
+                              <img src="./resources/rock-1.png" alt="rock" class="rk-t">
+                              <canvas id="can">Sorry! your browser doesn't supports canvas</canvas>
+                              <img src="./resources/rock-2.png" alt="rock" class="rk-b">
+                        </div>
+                  </div>
+            </div>
+      </div>
+      <audio src="./resources/audio/bg-audio.mp3" loop="loop"></audio>
+      <script src="./script.js"></script>
+</body>
+
+</html>
