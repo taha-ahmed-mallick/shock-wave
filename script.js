@@ -199,6 +199,10 @@ class Player {
             this.px = this.x / cvs.width * 100;
             this.py = this.y / cvs.height * 100;
       }
+
+      collisionDetection() {
+
+      }
 }
 
 let numPlyrs = 2;
