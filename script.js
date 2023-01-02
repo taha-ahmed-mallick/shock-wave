@@ -138,6 +138,7 @@ class Player {
       }
 
       draw() {
+            if (this.angle >= 360) this.angle %= 360;
             ctx.beginPath();
             ctx.translate(this.x, this.y);
             ctx.rotate(this.angle * Math.PI / 180);
@@ -150,6 +151,7 @@ class Player {
             ctx.rotate(-this.angle * Math.PI / 180);
             ctx.translate(-this.x, -this.y);
             ctx.closePath();
+            this.collisionDetection();
       }
 
       move(event) {
@@ -157,28 +159,64 @@ class Player {
                   case "up":
                         if (!this.movement[0]) {
                               let up = setInterval(() => {
-                                    this.movement[0] ? this.y -= this.speed : clearInterval(up);
+                                    if (this.movement[0]) {
+                                          this.y -= this.speed;
+                                          if (this.angle < 180 && this.angle >= 0) {
+                                                this.angle -= this.speed;
+                                          } else if (this.angle >= 180 && this.angle <= 360) {
+                                                this.angle += this.speed;
+                                          }
+                                    } else clearInterval(up);
                               }, 10);
                         }
                         break;
                   case "left":
                         if (!this.movement[1]) {
                               let left = setInterval(() => {
-                                    this.movement[1] ? this.x -= this.speed : clearInterval(left);
+                                    if (this.movement[1]) {
+                                          this.x -= this.speed;
+                                          if (this.angle >= 0) {
+                                                if (this.angle > 270 && this.angle <= 360 || this.angle <= 90 && this.angle >= 0) {
+                                                      this.angle -= this.speed;
+                                                } else if (this.angle > 90) {
+                                                      this.angle += this.speed;
+                                                }
+                                          } else if (this.angle < 0) {
+                                                this.angle = 360 - Math.abs(this.angle);
+                                          }
+                                    } else clearInterval(left);
                               }, 10);
                         }
                         break;
                   case "down":
                         if (!this.movement[2]) {
                               let down = setInterval(() => {
-                                    this.movement[2] ? this.y += this.speed : clearInterval(down);
+                                    if (this.movement[2]) {
+                                          this.y += this.speed;
+                                          if (this.angle >= 0 && this.angle <= 180) {
+                                                this.angle += this.speed;
+                                          } else if (this.angle > 180 && this.angle <= 360) {
+                                                this.angle -= this.speed;
+                                          }
+                                    } else clearInterval(down);
                               }, 10);
                         }
                         break;
                   case "right":
                         if (!this.movement[3]) {
                               let right = setInterval(() => {
-                                    this.movement[3] ? this.x += this.speed : clearInterval(right);
+                                    if (this.movement[3]) {
+                                          this.x += this.speed;
+                                          if (this.angle >= 0) {
+                                                if (this.angle <= 270 && this.angle >= 90) {
+                                                      this.angle -= this.speed;
+                                                } else if (this.angle >= 0 && this.angle <= 90 || this.angle <= 360 && this.angle > 270) {
+                                                      this.angle += this.speed;
+                                                }
+                                          } else if (this.angle < 0) {
+                                                this.angle = 360 - Math.abs(this.angle);
+                                          }
+                                    } else clearInterval(right);
                               }, 10);
                         }
                         break;
