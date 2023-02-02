@@ -133,7 +133,7 @@ class Player {
             this.py = y / cvs.height * 100;
             this.angle = angle;
             this.headSize = 25 / 686 * cvs.height;
-            this.speed = 1;
+            this.speed = 5;
             this.movement = [0, 0, 0, 0];
       }
 
@@ -151,7 +151,6 @@ class Player {
             ctx.rotate(-this.angle * Math.PI / 180);
             ctx.translate(-this.x, -this.y);
             ctx.closePath();
-            this.collisionDetection();
       }
 
       move(event) {
@@ -160,64 +159,72 @@ class Player {
                         if (!this.movement[0]) {
                               let up = setInterval(() => {
                                     if (this.movement[0]) {
-                                          this.y -= this.speed;
-                                          if (this.angle < 180 && this.angle >= 0) {
-                                                this.angle -= this.speed;
-                                          } else if (this.angle >= 180 && this.angle <= 360) {
-                                                this.angle += this.speed;
-                                          }
+                                          this.y--;
+                                          this.direction();
+                                          // if (this.angle < 180 && this.angle >= 0) {
+                                          //       this.angle--;
+                                          // } else if (this.angle >= 180 && this.angle <= 360) {
+                                          //       this.angle++;
+                                          // }
+                                          this.collisionDetection();
                                     } else clearInterval(up);
-                              }, 10);
+                              }, this.speed);
                         }
                         break;
                   case "left":
                         if (!this.movement[1]) {
                               let left = setInterval(() => {
                                     if (this.movement[1]) {
-                                          this.x -= this.speed;
-                                          if (this.angle >= 0) {
-                                                if (this.angle > 270 && this.angle <= 360 || this.angle <= 90 && this.angle >= 0) {
-                                                      this.angle -= this.speed;
-                                                } else if (this.angle > 90) {
-                                                      this.angle += this.speed;
-                                                }
-                                          } else if (this.angle < 0) {
-                                                this.angle = 360 - Math.abs(this.angle);
-                                          }
+                                          this.x--;
+                                          this.direction();
+                                          // if (this.angle >= 0) {
+                                          //       if (this.angle > 270 && this.angle <= 360 || this.angle <= 90 && this.angle >= 0) {
+                                          //             this.angle--;
+                                          //       } else if (this.angle > 90) {
+                                          //             this.angle++;
+                                          //       }
+                                          // } else if (this.angle < 0) {
+                                          //       this.angle = 360 - Math.abs(this.angle);
+                                          // }
+                                          this.collisionDetection();
                                     } else clearInterval(left);
-                              }, 10);
+                              }, this.speed);
                         }
                         break;
                   case "down":
                         if (!this.movement[2]) {
                               let down = setInterval(() => {
                                     if (this.movement[2]) {
-                                          this.y += this.speed;
-                                          if (this.angle >= 0 && this.angle <= 180) {
-                                                this.angle += this.speed;
-                                          } else if (this.angle > 180 && this.angle <= 360) {
-                                                this.angle -= this.speed;
-                                          }
+                                          this.y++;
+                                          this.direction();
+                                          // if (this.angle >= 0 && this.angle <= 180) {
+                                          //       this.angle++;
+                                          // } else if (this.angle > 180 && this.angle <= 360) {
+                                          //       this.angle--;
+                                          // }
+                                          this.collisionDetection();
                                     } else clearInterval(down);
-                              }, 10);
+                              }, this.speed);
                         }
                         break;
                   case "right":
                         if (!this.movement[3]) {
                               let right = setInterval(() => {
                                     if (this.movement[3]) {
-                                          this.x += this.speed;
-                                          if (this.angle >= 0) {
-                                                if (this.angle <= 270 && this.angle >= 90) {
-                                                      this.angle -= this.speed;
-                                                } else if (this.angle >= 0 && this.angle <= 90 || this.angle <= 360 && this.angle > 270) {
-                                                      this.angle += this.speed;
-                                                }
-                                          } else if (this.angle < 0) {
-                                                this.angle = 360 - Math.abs(this.angle);
-                                          }
+                                          this.x++;
+                                          this.direction();
+                                          // if (this.angle >= 0) {
+                                          //       if (this.angle <= 270 && this.angle >= 90) {
+                                          //             this.angle--;
+                                          //       } else if (this.angle >= 0 && this.angle <= 90 || this.angle <= 360 && this.angle > 270) {
+                                          //             this.angle++;
+                                          //       }
+                                          // } else if (this.angle < 0) {
+                                          //       this.angle = 360 - Math.abs(this.angle);
+                                          // }
+                                          this.collisionDetection();
                                     } else clearInterval(right);
-                              }, 10);
+                              }, this.speed);
                         }
                         break;
                   default:
@@ -225,6 +232,27 @@ class Player {
                         break;
             }
             this.updatePercentages();
+      }
+
+      direction() {
+            console.log(this.movement);
+            if (this.movement[0] && this.movement[1]) {
+                  this.angle = 315;
+            } else if (this.movement[1] && this.movement[2]) {
+                  this.angle = 225;
+            } else if (this.movement[2] && this.movement[3]) {
+                  this.angle = 135;
+            } else if (this.movement[0] && this.movement[3]) {
+                  this.angle = 45;
+            } else if (this.movement[0]) {
+                  this.angle = 0;
+            } else if (this.movement[1]) {
+                  this.angle = 270;
+            } else if (this.movement[2]) {
+                  this.angle = 180;
+            } else if (this.movement[3]) {
+                  this.angle = 90;
+            }
       }
 
       resized() {
@@ -239,6 +267,25 @@ class Player {
       }
 
       collisionDetection() {
+            // console.log(`${this.angle}`);
+            for (let i = 0; i < plyrArr.length; i++) {
+                  if (plyrArr[i].name != this.name) {
+                        let [x1, y1, x2, y2] = [plyrArr[i].x, plyrArr[i].y, this.x, this.y];
+                        let dx = x2 - x1;
+                        let dy = y2 - y1;
+                        let dc = Math.sqrt(dx ** 2 + dy ** 2);
+                        if (dc <= this.headSize * 2) {
+                              let y = -Math.cos(this.angle * 180 / Math.PI) * this.speed * 1.5;
+                              let x = -Math.sin(this.angle * 180 / Math.PI) * this.speed * 1.5;
+                              console.log(`x: ${x}, y: ${y}`);
+                              plyrArr[i].x += x;
+                              plyrArr[i].y += y;
+                        }
+                  }
+            }
+      }
+
+      movedByCollision() {
 
       }
 }
